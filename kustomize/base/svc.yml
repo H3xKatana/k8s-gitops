@@ -1,0 +1,17 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: demo-microservice-api-svc
+  namespace: default
+  labels:
+    app: demo-microservice-api
+spec:
+  selector:
+    app: demo-microservice-api
+  type: ClusterIP
+  ports:
+  - name: web-app
+    port: 3000
+    targetPort: 3000
+    protocol: TCP
+    

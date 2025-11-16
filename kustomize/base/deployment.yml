@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-microservice-api
+  namespace: default
+  labels:
+    app: demo-microservice-api
+spec:
+  selector:
+    matchLabels:
+      app: demo-microservice-api
+  replicas: 2
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: demo-microservice-api
+    spec:
+      containers:
+      - name: demo-microservice-api
+        image: ghcr.io/h3xkatana/k8s-microservices-demo-api:latest
+        resources:
+          requests:
+            cpu: 100m
+            memory: 200Mi
+          limits:
+            cpu: 100m
+            memory: 200Mi
+        
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 5
+          timeoutSeconds: 2
+          successThreshold: 1
+          failureThreshold: 3
+          periodSeconds: 10
+        env:
+        # Non-sensitive environment variables
+        - name: BETTER_AUTH_URL
+          value: "http://localhost:3000"
+        - name: CORS_ORIGIN
+          value: "*"
+        # Environment variables from secrets
+        - name: BETTER_AUTH_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: demo-microservice-secrets
+              key: BETTER_AUTH_SECRET
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: demo-microservice-secrets
+              key: DATABASE_URL
+        ports:
+        - containerPort: 3000
+          name: demo-microservice-api
+      restartPolicy: Always
