@@ -6,5 +6,5 @@ resources:
 - svc.yml
 - ingress.yml
 - certificate.yml
-- external-dns.yml
+#- external-dns.yml
 - cluster-issuer.yml
