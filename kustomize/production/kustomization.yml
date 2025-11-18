@@ -3,3 +3,8 @@ kind: Kustomization
 
 bases:
 - ../base
+
+namespace: microservice-api-gitops-demo
+
+resources:
+- ingress-http.yml

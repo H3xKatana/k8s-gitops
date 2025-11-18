@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: demo-microservice-api-ingress-http
+  namespace: microservice-api-gitops-demo
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+spec:
+  rules:
+    - host: api-kustomize-k8s.0xkatana.site
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: kustomizedemo-microservice-api-svc
+              port:
+                number: 3000
