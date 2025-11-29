@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: argocd-demo-server
+  namespace: microservice-api-gitops-demo
+spec:
+  type: ExternalName
+  externalName: argocd-demo-server.default.svc.cluster.local
+  ports:
+    - port: 443
+      targetPort: 443

@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: argocd-server-ingress
-  namespace: default
+  namespace: microservice-api-gitops-demo
   annotations:
     kubernetes.io/ingress.class: "traefik"
     cert-manager.io/cluster-issuer: letsencrypt-prod
@@ -13,14 +13,14 @@ spec:
     - host: argocd.0xkatana.site
       http:
         paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: argocd-demo-server
-              port:
-                name: https
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: argocd-demo-server
+                port:
+                  number: 443
   tls:
-  - hosts:
-    - argocd.0xkatana.site
-    secretName: argocd-tls
+    - hosts:
+        - argocd.0xkatana.site
+      secretName: argocd-tls
