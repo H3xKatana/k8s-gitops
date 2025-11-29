@@ -8,3 +8,4 @@ namespace: microservice-api-gitops-demo
 
 resources:
 - ingress-http.yml
+- argocd-ingress.yml

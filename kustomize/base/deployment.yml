@@ -5,6 +5,7 @@ metadata:
   namespace: default
   labels:
     app: demo-microservice-api
+
 spec:
   selector:
     matchLabels:
@@ -22,7 +23,7 @@ spec:
     spec:
       containers:
       - name: demo-microservice-api
-        image: ghcr.io/h3xkatana/k8s-microservices-demo-api:latest
+        image: ghcr.io/h3xkatana/k8s-microservices-demo-api:main-6dfe6c7
         resources:
           requests:
             cpu: 100m
@@ -30,7 +31,7 @@ spec:
           limits:
             cpu: 100m
             memory: 200Mi
-        
+
         readinessProbe:
           httpGet:
             path: /
