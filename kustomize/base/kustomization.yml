@@ -9,3 +9,7 @@ resources:
 #- certificate.yml
 #- external-dns.yml
 - cluster-issuer.yml
+
+images:
+  - name: ghcr.io/h3xkatana/k8s-microservices-demo-api
+    newTag: "main-6dfe6c7"

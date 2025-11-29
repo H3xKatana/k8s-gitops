@@ -5,6 +5,13 @@ metadata:
   namespace: default
   labels:
     app: demo-microservice-api
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: api=ghcr.io/h3xkatana/k8s-microservices-demo-api
+    argocd-image-updater.argoproj.io/api.update-strategy: digest
+    argocd-image-updater.argoproj.io/api.allow-tags: regexp:^main-.*$
+    argocd-image-updater.argoproj.io/api.write-back-method: git
+    argocd-image-updater.argoproj.io/write-back-target: kustomization
+
 
 spec:
   selector:
