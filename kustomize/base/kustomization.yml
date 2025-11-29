@@ -6,6 +6,6 @@ resources:
 - deployment.yml
 - svc.yml
 - ingress.yml
-- certificate.yml
+#- certificate.yml
 #- external-dns.yml
 - cluster-issuer.yml
